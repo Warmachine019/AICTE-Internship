@@ -26,27 +26,6 @@ This project estimates **Supply Chain Emission Factors with Margins** based on k
 
 ---
 
-## 📂 Project Structure
-
-.
-├── data/
-│ └── Data_Set.xlsx
-├── models/
-│ ├── random_forest_model.pkl
-│ ├── scaler.pkl
-│ └── feature_columns.pkl
-├── train_model.py
-├── app.py
-├── .streamlit/
-│ └── config.toml
-└── README.md
-
-yaml
-Copy
-Edit
-
----
-
 ## ⚙️ How to Run
 
 ### 1️⃣ Train the Model
