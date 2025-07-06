@@ -5,9 +5,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error
 import joblib
 
-# -------------------------
-# File and sheet handling
-# -------------------------
+# File and Sheet handling
 excel_path = "Data_Set.xlsx"
 excel_file = pd.ExcelFile(excel_path)
 
@@ -71,7 +69,7 @@ print(f"📉 Mean Squared Error: {mse:.6f}")
 # -------------------------
 # Save model and scaler
 # -------------------------
-joblib.dump(model, 'models/random_forest_model.pkl')
-joblib.dump(scaler, 'models/scaler.pkl')
-joblib.dump(feature_cols, 'models/feature_columns.pkl')  # Save feature order for inference
+joblib.dump(model, '../Final Project/models/random_forest_model.pkl')
+joblib.dump(scaler, '../Final Project/models/scaler.pkl')
+joblib.dump(feature_cols, '../Final Project/models/feature_columns.pkl')  # Save feature order for inference
 print("💾 Saved: random_forest_model.pkl, scaler.pkl, feature_columns.pkl")
