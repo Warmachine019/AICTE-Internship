@@ -44,11 +44,6 @@ Edit
 
 ---
 
-## 🌐 Live Demo
-*(Optional: add your Streamlit sharing link here)*
-
----
-
 ## ✨ Future Scope
 
 - Add Linear Regression baseline model
