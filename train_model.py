@@ -9,10 +9,9 @@ import joblib
 excel_path = "Data_Set.xlsx"
 excel_file = pd.ExcelFile(excel_path)
 
-# Select only '_Summary_Commodity' sheets
+# Select only Summary_Commodity sheets
 commodity_sheets = [sheet for sheet in excel_file.sheet_names if sheet.endswith('_Summary_Commodity')]
 
-# Feature columns (X) and Target column (y)
 feature_cols = [
     'Supply Chain Emission Factors without Margins',
     'Margins of Supply Chain Emission Factors',
@@ -24,9 +23,7 @@ feature_cols = [
 ]
 target_col = 'Supply Chain Emission Factors with Margins'
 
-# -------------------------
-# Load and combine all sheets
-# -------------------------
+# Loading and combining all the sheets
 dataframes = []
 for sheet in commodity_sheets:
     df = pd.read_excel(excel_path, sheet_name=sheet)
@@ -37,38 +34,28 @@ for sheet in commodity_sheets:
 # Combine data from all sheets
 combined_df = pd.concat(dataframes, ignore_index=True)
 
-# -------------------------
-# Split data
-# -------------------------
+# Splitting the data
 X = combined_df[feature_cols]
 y = combined_df[target_col]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# -------------------------
-# Scale the data
-# -------------------------
+# Scaling the data
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# -------------------------
-# Train RandomForestRegressor
-# -------------------------
+# Training the RFR Model
 model = RandomForestRegressor(n_estimators=100, random_state=42)
 model.fit(X_train_scaled, y_train)
 
-# -------------------------
-# Evaluation
-# -------------------------
+# Testing the model
 y_pred = model.predict(X_test_scaled)
 mse = mean_squared_error(y_test, y_pred)
 print(f"✅ Trained on {len(X)} rows from {len(commodity_sheets)} sheets")
 print(f"📉 Mean Squared Error: {mse:.6f}")
 
-# -------------------------
-# Save model and scaler
-# -------------------------
+# Saving the Random forest mode, scaler and feature columns
 joblib.dump(model, '../Final Project/models/random_forest_model.pkl')
 joblib.dump(scaler, '../Final Project/models/scaler.pkl')
 joblib.dump(feature_cols, '../Final Project/models/feature_columns.pkl')  # Save feature order for inference
